@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.tienda.core.domain.Cliente;
+import edu.tienda.core.exceptions.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/clientes")
@@ -34,14 +36,21 @@ public class ClienteRestController {
 
     @GetMapping("/{username}")
     public ResponseEntity<?> getCliente(@PathVariable String username) {
-        
-        for(Cliente cliente : clientes){
-            if (cliente.getUsername().equalsIgnoreCase(username)) {
-                return ResponseEntity.ok(cliente);
-            }
-        }
 
-        return ResponseEntity.notFound().build();
+        try {
+            if (username.length()!=3) {
+                throw new BadRequestException("El Parámetro nombre debe contener 3 caracteres");  
+            }
+    
+            return clientes.stream()
+            .filter(cliente -> cliente.getUsername().equalsIgnoreCase(username))
+            .findFirst()
+            .map(ResponseEntity :: ok)
+            .orElseThrow(() -> new ResourceNotFoundException("Cliente: " + username + " no encontrado"));
+        } catch (BadRequestException e) {
+            // TODO: handle exception
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping
@@ -49,10 +58,10 @@ public class ClienteRestController {
         clientes.add(cliente);
 
         URI location = ServletUriComponentsBuilder
-            .fromCurrentRequest()
-            .path("/{username}")
-            .buildAndExpand(cliente.getUsername())
-            .toUri();
+                .fromCurrentRequest()
+                .path("/{username}")
+                .buildAndExpand(cliente.getUsername())
+                .toUri();
         return ResponseEntity.created(location).body(cliente);
     }
 
