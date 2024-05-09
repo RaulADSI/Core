@@ -17,6 +17,8 @@ public class ProductoControllerRest {
 
     //Instanciamos la clase de servicio con "Java puro"
     @Autowired
+    
+
     private ProductoService productosService;
 
     @GetMapping
