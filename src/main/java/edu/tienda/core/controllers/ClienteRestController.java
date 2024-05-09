@@ -35,9 +35,9 @@ public class ClienteRestController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<?> getCliente(@PathVariable String username) {
+    public ResponseEntity<?> getCliente(@PathVariable String username) throws BadRequestException {
 
-        try {
+        
             if (username.length()!=3) {
                 throw new BadRequestException("El Parámetro nombre debe contener 3 caracteres");  
             }
@@ -47,10 +47,7 @@ public class ClienteRestController {
             .findFirst()
             .map(ResponseEntity :: ok)
             .orElseThrow(() -> new ResourceNotFoundException("Cliente: " + username + " no encontrado"));
-        } catch (BadRequestException e) {
-            // TODO: handle exception
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+       
     }
 
     @PostMapping
