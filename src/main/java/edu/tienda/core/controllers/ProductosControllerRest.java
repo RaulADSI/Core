@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.tienda.core.configurations.ConfigurationsParameters;
 import edu.tienda.core.domain.Producto;
 import edu.tienda.core.services.ProductoService;
 
@@ -22,8 +23,13 @@ public class ProductosControllerRest  {
     @Lazy
     private ProductoService productosService;
 
+    @Autowired
+    private ConfigurationsParameters configurationParameters;
+
     @GetMapping
     public ResponseEntity<?> getProductos() {
+        
+        System.out.println("params: " + configurationParameters.toString());
 
         List<Producto> productos = productosService.getProductos();
 
