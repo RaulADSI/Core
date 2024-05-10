@@ -1,5 +1,7 @@
 package edu.tienda.core.controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,17 @@ public class ProductosControllerRest  {
 
         List<Producto> productos = productosService.getProductos();
 
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/fake-productos")
+    public ResponseEntity<?> fakeProductosAPI(){
+
+        List<Producto> productos = new ArrayList<>(Arrays.asList(
+            new Producto(1, "Camiseta Milan", 12000.0, 4),
+            new Producto(2, "Camiseta Cartagena", 15000.0, 8),
+            new Producto(3, "Camiseta Dortmund", 10000.0, 1)
+        ));
         return ResponseEntity.ok(productos);
     }
 }
