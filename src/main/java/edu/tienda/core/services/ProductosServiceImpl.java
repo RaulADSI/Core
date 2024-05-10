@@ -6,10 +6,12 @@ import java.util.List;
 //import java.util.Optional;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import edu.tienda.core.domain.Producto;
 
+@Lazy
 @Service("MEMORY")
 @ConditionalOnProperty(value = "productos.estrategias", havingValue = "EN_MEMORIA")
 public class ProductosServiceImpl implements ProductoService {
