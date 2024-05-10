@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import edu.tienda.core.domain.Producto;
+import lombok.extern.slf4j.Slf4j;
 
 @Lazy
+@Slf4j
 @Service("MEMORY")
 @ConditionalOnProperty(value = "productos.estrategias", havingValue = "EN_MEMORIA")
 public class ProductosServiceImpl implements ProductoService {
@@ -22,7 +24,7 @@ public class ProductosServiceImpl implements ProductoService {
             new Producto(3, "Tablet", 7000.0, 5)));
 
     public ProductosServiceImpl() {
-        System.out.println("Se esta construyendo un objeto de la clase ProductosServiceImpl. ");
+        log.info("Se esta construyendo un objeto de la clase ProductosServiceImpl.");
     }
 
     public List<Producto> getProductos() {
