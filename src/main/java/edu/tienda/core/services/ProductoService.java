@@ -1,8 +1,8 @@
 package edu.tienda.core.services;
-
+import edu.tienda.core.domain.Producto;
 import java.util.List;
 
-import edu.tienda.core.domain.Producto;
+
 
 public interface ProductoService {
 
