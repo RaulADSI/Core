@@ -30,4 +30,9 @@ public class ProductosServiceJSONImpl implements ProductoService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void saveProducto(Producto producto) {
+        
+    }
 }

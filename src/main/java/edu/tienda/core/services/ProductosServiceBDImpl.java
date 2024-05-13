@@ -34,6 +34,18 @@ public class ProductosServiceBDImpl implements ProductoService {
         return productos;
     }
 
-   
+    @Override
+    public void saveProducto(Producto producto) {
+        //Mapeo de Producto a ProductoEntity
+        ProductoEntity productoEntity = new ProductoEntity();
+        productoEntity.setNombre(producto.getNombre());
+        productoEntity.setPrecio(producto.getPrecio());
+        productoEntity.setStock(producto.getStock());
+
+        //Persistencia
+        ProductoEntity productoSaved = productosRepository.save(productoEntity);
+        producto.setId(productoSaved.getId());
+    }
+
 
 }
