@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import edu.tienda.core.domain.Producto;
 
 @Service("API")
-@ConditionalOnProperty(value = "productos.estrategias", havingValue = "EN_OTRA_API")
+@ConditionalOnProperty(value = "productos.estrategia", havingValue = "EN_OTRA_API")
 public class ProductosServiceImplApiExterna implements ProductoService {
 
     @Override

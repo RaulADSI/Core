@@ -13,7 +13,7 @@ import edu.tienda.core.domain.Producto;
 
 @Primary
 @Service("JSON")
-@ConditionalOnProperty(value = "productos.estrategias", havingValue = "EN_JSON")
+@ConditionalOnProperty(value = "productos.estrategia", havingValue = "EN_JSON")
 public class ProductosServiceJSONImpl implements ProductoService {
 
     public List<Producto> getProductos(){

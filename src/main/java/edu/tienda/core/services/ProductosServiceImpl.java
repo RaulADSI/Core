@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Lazy
 @Slf4j
 @Service("MEMORY")
-@ConditionalOnProperty(value = "productos.estrategias", havingValue = "EN_MEMORIA")
+@ConditionalOnProperty(value = "productos.estrategia", havingValue = "EN_MEMORIA")
 public class ProductosServiceImpl implements ProductoService {
 
     private List<Producto> productos = new ArrayList<>(Arrays.asList(
